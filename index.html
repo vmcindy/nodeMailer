@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title>Email and Text message application</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		    var from,to,subject,text,sendUsing;
+
+		    $("#send_email_nodemailer").click(function(){
+		    	sendUsing = "nodemailer";
+		    	console.log(sendUsing);
+		        to=$("#to").val();
+		        subject=$("#subject").val();
+		        text=$("#content").val();
+		        $("#message").text("Sending E-mail...Please wait");
+		        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text,sendUsing:sendUsing},function(data){
+			        if(data=="sent")
+			        {
+			            $("#message").empty().html("Email has been sent at "+to+" using NodeMailer. Please check inbox !");
+			        }
+				});
+		    });
+			$("#send_email_sendgrid").click(function(){
+			    sendUsing = "sendgrid";
+			    console.log(sendUsing);
+		        to=$("#to").val();
+		        console.log(to);
+		        subject=$("#subject").val();
+		        text=$("#content").val();
+		        $("#message").text("Sending E-mail...Please wait");
+		        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text,sendUsing:sendUsing},function(data){
+			        if(data=="sent")
+			        {
+			            $("#message").empty().html("Email has been sent at "+to+" using SendGrid. Please check inbox !");
+			        }
+				});
+		    });
+		    $("#send_txt_twilio").click(function(){
+			    sendUsing = "twilio";
+			    console.log(sendUsing);
+		        to=$("#to_phone").val();
+		        body=$("#text_message").val();
+		        $("#message_txt").text("Sending txt message...Please wait");
+		        $.get("http://localhost:3000/send",{to:to,body:body,sendUsing:sendUsing},function(data){
+			        if(data=="sent")
+			        {
+			            $("#message_txt").empty().html("Text message has been sent to "+to+" . Please check inbox !");
+			        }
+				});
+		    });   
+		});
+	</script>
+</head>
+<body>
+<div id="container">
+	<h1>Send an email to any ID:</h1>
+	<p><input id="to" type="text" placeholder="Enter destination Email" /></p>
+	<p><input id="subject" type="text" placeholder="Write Subject" /></p>
+	<p><textarea id="content" cols="40" rows="5" placeholder="Write what you want to send"></textarea></p>
+	<p><button id="send_email_nodemailer">Send Using NodeMailer </button></p>
+	<p><button id="send_email_sendgrid">Send Using SendGrid </button></p>
+	<span id="message"></span>
+
+	<h1>Send a text message to any phone number:</h1>
+	<p><input id="to_phone" type="text" placeholder="Enter destination phone number" /></p>
+	<p><textarea id="text_message" cols="40" rows="5" placeholder="Write what you want to send"></textarea></p>
+	<p><button id="send_txt_twilio">Send Text Message</button></p>
+	<span id="message_txt"></span>
+</div>
+</div>
