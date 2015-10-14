@@ -71,10 +71,6 @@ app.get('/send',function(req,res){
 	}
 });
 
-app.get('/send',function(req,res){
-	twilio.sendMessage(phoneOtions)
-
-});
 /*--------------------Routing Over----------------------------*/
 app.listen(3000,function(){
 	console.log("Express Started on Port 3000");
