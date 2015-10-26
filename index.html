@@ -24,7 +24,7 @@
 		        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text,sendUsing:sendUsing},function(data){
 			        if(data=="sent")
 			        {
-			            $("#message").empty().html("Email has been sent at "+to+" using NodeMailer. Please check inbox !");
+			            $("#message").empty().html("Email has been sent at "+to+" using NodeMailer. Please check inbox !").delay(2000).fadeOut();
 			        }
 				});
 		    });
@@ -39,7 +39,7 @@
 		        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text,sendUsing:sendUsing},function(data){
 			        if(data=="sent")
 			        {
-			            $("#message").empty().html("Email has been sent at "+to+" using SendGrid. Please check inbox !");
+			            $("#message").empty().html("Email has been sent at "+to+" using SendGrid. Please check inbox !").delay(2000).fadeOut();
 			        }
 				});
 		    });
@@ -52,10 +52,11 @@
 		        $.get("http://localhost:3000/send",{to:to,body:body,sendUsing:sendUsing},function(data){
 			        if(data=="sent")
 			        {
-			            $("#message_txt").empty().html("Text message has been sent to "+to+" . Please check inbox !");
+			            $("#message_txt").empty().html("Text message has been sent to "+to+" . Please check inbox !").delay(2000).fadeOut();
 			        }
 				});
 		    });   
+		    
 		});
 	</script>
 </head>
