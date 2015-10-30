@@ -1,6 +1,6 @@
 # nodeMailer
 
-Create cred.js file in root level, with the following code. <br>
+Create cred.js file in a folder called 'js', in root level, with the following code. <br>
 ////////////////////////// START //////////////////////////<br>
 	var cred = {<br>
 		email : 'youremail@gmail.com',<br>
