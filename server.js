@@ -1,10 +1,12 @@
-var cred = require('./cred.js');
+var cred = require('./js/cred.js');
 var express=require('express');
 var nodemailer = require("nodemailer");
 var sendgrid  = require('sendgrid')(cred.sendgrid_apikey);
 var twilio = require('twilio')(cred.twilio_sid , cred.twilio_token);
+var ejs = require('ejs');
 
 var app=express();
+
 /* Here we are configuring our SMTP Server details. STMP is mail server which is responsible for sending and recieving email.*/
 var smtpTransport = nodemailer.createTransport("SMTP",{
 	service: "Gmail",
@@ -16,8 +18,10 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 /*------------------SMTP Over-----------------------------*/
 /*------------------Routing Started ------------------------*/
 
+app.set('view engine', 'ejs');
+
 app.get('/',function(req,res){
-	res.sendfile('index.html');
+	res.render('pages/index');
 });
 
 app.get('/send',function(req,res){
